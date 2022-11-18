@@ -136,5 +136,17 @@ namespace double_linked_list
                     Console.Write(currentNode.noMhs + currentNode.name + "\n");
             }
         }
+
+        public void descending()
+        {
+            if (listEmpty())
+                Console.WriteLine("\nList is empty");
+            else
+            {
+                Console.WriteLine("Record in the Descending order of" + "Roll number are:\n");
+                Node currentNode;
+
+            }
+        }
     }
 }
