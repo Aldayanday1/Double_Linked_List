@@ -9,5 +9,6 @@ namespace double_linked_list
           * its succeding and preceeding
           * in terms of next and previous */
         public int noMhs;
+        public string name;
     }
 }
