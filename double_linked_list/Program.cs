@@ -2,6 +2,9 @@
 
 namespace double_linked_list
 {
+    /// <summary>
+    /// main class
+    /// </summary>
     class Node
     {
         //publik yang bertipekan data apapun yang merepresentasikan bilangan bulat, atau beberapa bagian dari bilangan bulat (integer)
@@ -23,6 +26,9 @@ namespace double_linked_list
 
         public void addNode()
         {
+            /// <summary>
+            /// operasi penambahan
+            /// </summary>
             int nim;
             string nm;
             //Fungsi Writeline adalah untuk menampilkan teks dalam satu baris atau baris baru
@@ -43,6 +49,9 @@ namespace double_linked_list
             {
                 if ((START != null) && (nim == START.barang))
                 {
+                    /// <returns>
+                    /// Hasil dari penambahan addNode
+                    /// </returns>
                     Console.WriteLine("\nDuplicate number not allowed");
                     //perintah return akan mengakhiri suatu method seperti yang telah dijelaskan sebelumnya di bagian kondisi pada C#
                     return;
