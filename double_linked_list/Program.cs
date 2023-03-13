@@ -4,20 +4,19 @@ namespace double_linked_list
 {
     class Node
     {
-        /*Node class represent the node of doubly linked list
-          * It consists of the information part and links to
-          * its succeding and preceeding
-          * in terms of next and previous */
-        public int noMhs;
+        //publik yang bertipekan data apapun yang merepresentasikan bilangan bulat, atau beberapa bagian dari bilangan bulat (integer)
+        public int barang;
+        //publik yang digunakan untuk menyimpan barisan karakter (string)
         public string name;
-        //point to the succeding node
+        //Untuk menunjuk ke node berikutnya
         public Node next;
-        //point to the preceeding node
+        //Untuk mendahului dari node sebelumnya
         public Node prev;
     }
 
     class DoubleLinkedList
     {
+        //Fungsi node adalah untuk mengirimkan data dan informasi dengan memanfaatkan media titik-titik yang terhubung dalam satu jaringan serupa.
         Node START;
 
         //constructor
@@ -26,20 +25,26 @@ namespace double_linked_list
         {
             int nim;
             string nm;
-            Console.WriteLine("\nEnter the roll number of the student: ");
+            //Fungsi Writeline adalah untuk menampilkan teks dalam satu baris atau baris baru
+            Console.WriteLine("\nMasukan Number data barang: ");
+            //Method ToInt32() digunakan untuk mengubah string menjadi integer. 
             nim = Convert.ToInt32(Console.ReadLine());
-            Console.Write("\nEnter the name of the student: ");
+            //Fungsi Write adalah untuk menampilkan teks tanpa membuat baris baru
+            Console.Write("\nMasukkan Nama Barang: ");
+            //Method readline() berfungsi untuk mengembalikan satu baris dari file.
             nm = Console.ReadLine();
+            //new digunakan untuk membuat objek. dalam contoh ini sebuah objek dibuat untuk kelas menggunakan yang baru, seperti halnya dibawah ini. Node newNode = new Node();
             Node newNode = new Node();
-            newNode.noMhs = nim;
+            newNode.barang = nim;
             newNode.name = nm;
 
-            //check if the list empty
-            if (START == null || nim <= START.noMhs)
+            //Fungsi IFNULL() adalah untuk mengembalikan nilai yang ditentukan jika ekspresinya adalah NULL.
+            if (START == null || nim == START.barang)
             {
-                if ((START != null) && (nim == START.noMhs))
+                if ((START != null) && (nim == START.barang))
                 {
                     Console.WriteLine("\nDuplicate number not allowed");
+                    //perintah return akan mengakhiri suatu method seperti yang telah dijelaskan sebelumnya di bagian kondisi pada C#
                     return;
                 }
                 newNode.next = START;
@@ -49,25 +54,23 @@ namespace double_linked_list
                 START = newNode;
                 return;
             }
-            /*if the node is to be inserted at beetwen two Node*/
+            //Node yang akan disisipkan diantara dua Node
             Node previous, current;
             for(current = previous = START;
-                current != null && nim >= current.noMhs;
+                current != null && nim >= current.barang;
                 previous = current, current = current.next)
             {
-                if (nim == current.noMhs)
+                if (nim == current.barang)
                 {
                     Console.WriteLine("\nDuplicate roll numbers not allowed");
                     return;
                 }
             }
-            /*On the execution of the above for loop, prev and 
-            * current will point to those nodes
-            * between which the new node is to be inserted */
+            //Pada eksekusi next & prev menrujuk pada node current & previous. di antaranya node baru juga akan disisipkan didalamnya
             newNode.next = current;
             newNode.prev = previous;
 
-           //if the node is to be inserted at the end of the list
+           //Jika node akan disisipkan di akhir daftar
            if (current == null)
             {
                 newNode.next = null;
@@ -77,12 +80,16 @@ namespace double_linked_list
             current.prev = newNode;
             previous.next = newNode;
         }
-
+        //Tipe data boolean ini berfungsi untuk mengisi salah satu dari 2 nilai, yaitu true atau false.
+        //Kata kunci int bagian bilangan bulat dari angka - untuk nilai argumen tunggal (angka apa saja) 0 - tanpa argumen
+        //Serta ref dalam C# juga digunakan untuk meneruskan atau mengembalikan referensi nilai ke atau dari Metode.
         public bool Search(int rollNo, ref Node previous, ref Node current)
         {
             previous = current = START;
+            //While digunakan untuk mengulang statement sebanyak satu kali terlebih dahulu, kemudian akan mengecek statement didalam while apakah bernilai benar
+            //dan apabila jika bernilai benar maka akan diulang kembali. Jika statement di dalam while bernilai salah maka perulangan akan berakhir.
             while (current != null &&
-                rollNo != current.noMhs)
+                rollNo != current.barang)
             {
                 previous = current;
                 current = current.next;
@@ -92,17 +99,18 @@ namespace double_linked_list
         public bool dellNode(int rollNo)
         {
             Node previous, current;
+            //Kata kunci Null adalah literal yang mewakili referensi Null / yang tidak merujuk ke objek apa pun.
             previous = current = null;
             if (Search(rollNo, ref previous, ref current) == false)
                 return false;
-            // the begining of data
+            //Perawalan data
             if (current.next == null)
             {
                 previous.next = null;
                 return true;
             }
-            //Node between two nodes in the list
-            if(current == START)
+            //Node masuk di antara dua node dalam daftar
+            if (current == START)
             {
                 START = START.next;
                 if (START != null)
@@ -110,7 +118,7 @@ namespace double_linked_list
                 return true;
             }
 
-            /*if the to be deleted is in between the list then the following lines of is executed. */
+            //jika yang akan dihapus ada di antara daftar maka baris berikut tersebut akan dieksekusi
             previous.next = current.next;
             current.next.prev = previous;
             return true;
@@ -130,10 +138,10 @@ namespace double_linked_list
                 Console.WriteLine("\nList is empty");
             else
             {
-                Console.WriteLine("\nRecord in the ascending order of" + "Roll number are:\n");
+                Console.WriteLine("\nTampilan dari data Ascending" + "dari urutan Number:\n");
                 Node currentNode;
                 for (currentNode = START; currentNode != null; currentNode = currentNode.next)
-                    Console.Write(currentNode.noMhs + currentNode.name + "\n");
+                    Console.Write(currentNode.barang + currentNode.name + "\n");
             }
         }
 
@@ -143,19 +151,19 @@ namespace double_linked_list
                 Console.WriteLine("\nList is empty");
             else
             {
-                Console.WriteLine("Record in the Descending order of" + "Roll number are:\n");
+                Console.WriteLine("Tampilan dari data Descending" + "dari urutan Number:\n");
                 Node currentNode;
-                //membawa currentNode ke node paling belakang
+                //Fungsinya untuk membawa currentNode ke node paling belakang
                 currentNode = START;
                 while (currentNode.next != null)
                 {
                     currentNode = currentNode.next;
                 }
 
-                //membaca data dari last node ke first node
+                //Fungsinya untuk membaca data dari last node ke first node
                 while (currentNode != null)
                 {
-                    Console.Write(currentNode.noMhs + " " + currentNode.name + "\n");
+                    Console.Write(currentNode.barang + " " + currentNode.name + "\n");
                     currentNode = currentNode.prev;
                 }
             }
@@ -164,21 +172,23 @@ namespace double_linked_list
 
     class Program
     {
+        //Method Static void Main adalah titik masuk dari program C #. Di sinilah eksekusi program C# dimulai.
         static void Main(string[] args)
         {
             DoubleLinkedList obj = new DoubleLinkedList();
             while (true)
             {
+                //Fungsi try dibawah ini menentukan blok kode yang akan diuji kesalahannya saat dieksekusi. 
                 try
                 {
-                    Console.WriteLine("\nMenu");
-                    Console.WriteLine("1. Add a record to the list");
-                    Console.WriteLine("2. Delete a record from the list");
-                    Console.WriteLine("3. View all records in the ascending order of roll numbers");
-                    Console.WriteLine("4. View all records in the descending order of roll numbers");
-                    Console.WriteLine("5. Search for a record in the list ");
-                    Console.WriteLine("6. Exit\n");
-                    Console.WriteLine("Enter your choice (1-6): ");
+                    Console.WriteLine("\nData Barang Toko Elektronik");
+                    Console.WriteLine("1. Menambahkan Data Barang");
+                    Console.WriteLine("2. Menghapus Data Barang");
+                    Console.WriteLine("3. Menampilkan semua data ascending");
+                    Console.WriteLine("4. Menampilkan semua data descending");
+                    Console.WriteLine("5. Mencari list barang");
+                    Console.WriteLine("6. Keluar\n");
+                    Console.WriteLine("Masukkan pilihan (1-6): ");
                     char ch = Convert.ToChar(Console.ReadLine());
                     switch (ch)
                     {
@@ -186,15 +196,16 @@ namespace double_linked_list
                             {
                                 obj.addNode();
                             }
+                            //Break pada Switch Case bertujuan untuk menghindari eksekusi pada case dibawahnya dan menghentikan program ketika value pada case sama dengan yang diharapkan.
                             break;
                         case '2':
                             {
                                 if (obj.listEmpty())
                                 {
-                                    Console.WriteLine("\nList is empty");
+                                    Console.WriteLine("\nList Kosong");
                                     break;
                                 }
-                                Console.Write("\nEnter the roll number of the student" +
+                                Console.Write("\nMasukan data barang" +
                                     "whose record is to be deleted: ");
                                 int rollNo = Convert.ToInt32(Console.ReadLine());
                                 Console.WriteLine();
@@ -219,20 +230,20 @@ namespace double_linked_list
                             {
                                 if(obj.listEmpty() == true)
                                 {
-                                    Console.WriteLine("\nList is empty");
+                                    Console.WriteLine("\nList kosong");
                                     break;
                                 }
                                 Node prev, curr;
                                 prev = curr = null;
-                                Console.Write("\nEnter the roll number of the student whose record you want to search: ");
+                                Console.Write("\nMasukkan data barang yang ingin kamu cari: ");
                                 int num = Convert.ToInt32(Console.ReadLine());
                                 if (obj.Search(num, ref prev, ref curr) == false)
-                                    Console.WriteLine("\nRecord not found");
+                                    Console.WriteLine("\nTidak ditemukan");
                                 else
                                 {
-                                    Console.WriteLine("\nRecord found");
-                                    Console.WriteLine("\nRoll number: " + curr.noMhs);
-                                    Console.WriteLine("\nName: " + curr.name);
+                                    Console.WriteLine("\nData Ditemukan");
+                                    Console.WriteLine("\nNumber Barang: " + curr.barang);
+                                    Console.WriteLine("\nNama: " + curr.name);
                                 }
                                 break;
                             }
@@ -245,6 +256,7 @@ namespace double_linked_list
                             break;
                     }
                 }
+                //Pernyataan catch berfungsi untuk menentukan blok kode yang akan dieksekusi, jika terjadi kesalahan pada blok try.
                 catch (Exception e)
                 {
                     Console.WriteLine("Check for the values entered.");
